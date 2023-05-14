@@ -9,15 +9,28 @@ import CustomFilters from '../components/CustomFilters';
 import SubHeader from '../components/SubHeader';
 import RestaurantList from '../components/RestaurantList';
 
-const HomeScreen = (props) => <ScrollView style={Styles.container}>
-    <CuisineFilters />
-    <CustomFilters navigation={props.navigation} />
-    <SubHeader titletext="Fastest Near You" />
-    <RestaurantList navigation={props.navigation} />
-    <View style={Styles.space} />
-    <SubHeader titletext="Top Rated for You" />
-    <RestaurantList navigation={props.navigation} />
-</ScrollView>;
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { fetchRestaurants } from '../redux/action';
+
+const HomeScreen = (props) => {
+    const restaurants = useSelector((state) => state.restaurants);
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchRestaurants())
+    }, [])
+
+    return <ScrollView style={Styles.container}>
+        <CuisineFilters />
+        <CustomFilters navigation={props.navigation} />
+        <SubHeader titletext="Fastest Near You" />
+        <RestaurantList navigation={props.navigation} data={restaurants} />
+        <View style={Styles.space} />
+        <SubHeader titletext="Top Rated for You" />
+        <RestaurantList navigation={props.navigation} data={restaurants} />
+    </ScrollView>
+};
 
 const Styles = StyleSheet.create({
     container: {

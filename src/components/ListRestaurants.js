@@ -9,7 +9,7 @@ import lightstar from '../assets/lightstar.png';
 // Components
 const Item = (props) => (
     <View key={props.item.title}>
-        <Image source={props.item.image} style={Styles.image} />
+        <Image source={restaurant} style={Styles.image} />
         <View style={Styles.header}>
             <Text style={Styles.headerTitle}>{props.item.title}</Text>
             <Image source={heart} style={Styles.headerHeart} />
@@ -37,58 +37,10 @@ const Item = (props) => (
     </View>
 );
 
-const data = [
-    {
-        image: restaurant,
-        title: `McDonald’s`,
-        distance: 1.1,
-        duration: 20,
-        rate: 4.5,
-        totalRateNumber: 9700,
-        minTotalFees: 0,
-        priceCategory: '$',
-        tags: 'American, Burgers'
-    },
-    {
-        image: restaurant,
-        title: `Jack in the Box`,
-        distance: 2.7,
-        duration: 35,
-        rate: 4.4,
-        totalRateNumber: 2400,
-        minTotalFees: 3.99,
-        priceCategory: '$$',
-        tags: 'American, Burgers'
-    },
-    {
-        image: restaurant,
-        title: `Mei'Mei's Kitchen`,
-        distance: 4.4,
-        duration: 40,
-        rate: 4.5,
-        totalRateNumber: 960,
-        minTotalFees: 5.99,
-        priceCategory: '$$',
-        tags: 'Korean, BBQ'
-    },
-    {
-        image: restaurant,
-        title: `Bamboo Bistro`,
-        distance: 4.4,
-        duration: 35,
-        rate: 4.6,
-        totalRateNumber: 7900,
-        minTotalFees: 5.99,
-        priceCategory: '$$$$',
-        tags: 'Thai'
-    },
-
-];
-
 const ListRestaurants = (props) => {
     return <View style={Styles.container}>
         <FlatList
-            data={data.filter(r => r.title.toLocaleLowerCase().includes(props.searchWord.toLocaleLowerCase()))}
+            data={props.data.filter(r => r.title.toLocaleLowerCase().includes(props.searchWord.toLocaleLowerCase()))}
             renderItem={({ item }) => <Item item={item} navigation={props.navigation} />}
             ItemSeparatorComponent={() => <View style={Styles.separator} />} />
     </View>

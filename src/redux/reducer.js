@@ -1,7 +1,8 @@
-import { UPDATE_PRICE_FILTER } from "./action";
+import { UPDATE_PRICE_FILTER, UPDATE_RESTAURANTS } from "./action";
 
 const initialState = {
-    priceFilter: [false, false, false, false]
+    priceFilter: [false, false, false, false],
+    restaurants: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 priceFilter: newPriceFilter
+            };
+        }
+
+        case UPDATE_RESTAURANTS: {
+            const fetchedRestaurants = [...action.payload.restaurants];
+
+            return {
+                ...state,
+                restaurants: fetchedRestaurants
             };
         }
         default:

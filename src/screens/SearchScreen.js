@@ -7,9 +7,12 @@ import ListRestaurants from '../components/ListRestaurants';
 // Components
 import SearchInput from '../components/SearchInput';
 
+// Redux
+import { useSelector } from "react-redux";
+
 const SearchScreen = () => {
     const [searchWord, setSearchWord] = useState("");
-
+    const restaurants = useSelector((state) => state.restaurants);
 
     return <View style={[Styles.container, { backgroundColor: searchWord.length > 0 ? 'white' : '#E7E7E7' }]}>
         <View style={Styles.inputContainer}>
@@ -20,7 +23,7 @@ const SearchScreen = () => {
                 bgcolor={searchWord.length > 0 ? '#E7E7E7' : 'white'}
             />
         </View>
-        <ListRestaurants searchWord={searchWord} />
+        <ListRestaurants searchWord={searchWord} data={restaurants} />
     </View>
 };
 
